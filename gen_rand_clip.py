@@ -9,7 +9,8 @@ def write_file(file_path, text):
     f.close()
 
 
-def gen_clip(vid_path, max_time=7, min_time=3, video_length=20):
+# NOTE THE FINAL BLINK IS AT 13s
+def gen_clip(vid_path, name, max_time=7, min_time=3, video_length=20):
     '''
     Author: Tony Xu
     Generates a video clip for the Flanker test
@@ -68,9 +69,11 @@ def gen_clip(vid_path, max_time=7, min_time=3, video_length=20):
     f = open('{}_log.txt'.format(vid_path), 'w')
     f.close()
     write_file('{}_log.txt'.format(vid_path), 'clip_num(0:leftarm, 1:leftleg, 2:rightarm, 3:rightleg) | time_in_video | length_of_clip\n')
+    write_file('{}_log.txt'.format(vid_path), 'experiment conducted by: {}\n'.format(name))
+    write_file('{}_log.txt'.format(vid_path), '-----Note: final blink is at 13 seconds-----\n')
     for clip in clip_log:
         write_file('{}_log.txt'.format(vid_path), '{} {} {}\n'.format(clip['clip_number'], clip['time'], clip['length']))
 
 
 if __name__ == '__main__':
-    gen_clip('final_clip')
+    gen_clip('nov16_clip3', 'Riley')
